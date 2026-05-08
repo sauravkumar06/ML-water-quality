@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💧 ML-Based Water Quality Testing System</title>
+
+<style>
+  /* === Base Layout === */
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0a0a0f, #0e1a20, #101820);
+    color: #e0f7ff;
+    overflow-x: hidden;
+  }
+
+  header {
+    background: linear-gradient(135deg, #021d2b, #00334d);
+    padding: 70px 20px;
+    text-align: center;
+    color: #e0f7ff;
+    box-shadow: 0 2px 30px rgba(0, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+  }
+
+  header h1 {
+    font-size: 2.6em;
+    margin: 0;
+    font-weight: 700;
+  }
+
+  header p {
+    font-size: 1.1em;
+    color: #a9cbd3;
+  }
+
+  /* === Sections === */
+  section {
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  h2 {
+    color: #00c8ff;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+  }
+
+  p {
+    color: #bcd2d6;
+    max-width: 800px;
+    margin: 0 auto 15px;
+    line-height: 1.6;
+  }
+
+  /* === Card === */
+  .card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(8px);
+    margin: 30px auto;
+    padding: 35px 25px;
+    border-radius: 14px;
+    width: 85%;
+    max-width: 850px;
+    border: 1px solid rgba(0, 255, 255, 0.08);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.05);
+    transition: 0.3s;
+  }
+
+  .card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+  }
+
+  /* === Input Form === */
+  .form-box {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(6px);
+    padding: 35px;
+    margin: 40px auto;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 500px;
+    border: 1px solid rgba(0, 255, 255, 0.08);
+  }
+
+  input {
+    width: 85%;
+    padding: 12px;
+    margin: 10px 0;
+    background: #0f1a1f;
+    border: 1px solid #00c8ff;
+    border-radius: 6px;
+    color: #e0f7ff;
+    font-size: 1em;
+    outline: none;
+    transition: 0.3s;
+  }
+
+  input:focus {
+    border-color: #00eaff;
+    box-shadow: 0 0 8px #00eaff;
+  }
+
+  button {
+    background: linear-gradient(90deg, #00eaff, #0077ff);
+    color: #fff;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 234, 255, 0.3);
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 234, 255, 0.5);
+  }
+
+  #result {
+    font-size: 1.2em;
+    margin-top: 25px;
+    color: #00ffb7;
+  }
+
+  footer {
+    text-align: center;
+    padding: 25px;
+    color: #88a3a9;
+    background: #0a0f12;
+    font-size: 0.9em;
+    border-top: 1px solid rgba(0, 255, 255, 0.08);
+  }
+
+  /* === Subtle Animations === */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  section, header, footer {
+    animation: fadeIn 1.5s ease;
+  }
+</style>
+</head>
+
+<body>
+  <header>
+    <h1>💧 ML-Based Water Quality Testing System</h1>
+    <p>AI-powered tool for predictive analysis & smart treatment recommendations</p>
+  </header>
+
+  <section>
+    <h2>How It Works</h2>
+    <p>Input the measured <b>pH</b>, <b>Turbidity</b>, and <b>Dissolved Oxygen</b> values from your water sample.  
+    The model simulates an ML-based classification to assess water quality and suggest treatments.</p>
+
+    <div class="form-box">
+      <input type="number" id="ph" placeholder="pH Level (0–14)" step="0.1">
+      <input type="number" id="turbidity" placeholder="Turbidity (NTU)" step="0.1">
+      <input type="number" id="oxygen" placeholder="Dissolved Oxygen (mg/L)" step="0.1">
+      <button onclick="predictQuality()">Analyze Quality</button>
+      <div id="result"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <h2>Sensor Interfacing Ranges</h2>
+      <p><b>pH Sensor:</b> 0–14 | Ideal: 6.5–8.5</p>
+      <p><b>Turbidity Sensor:</b> 0–1000 NTU | Safe: ≤5 NTU</p>
+      <p><b>Dissolved Oxygen:</b> 0–20 mg/L | Ideal: ≥6 mg/L</p>
+    </div>
+
+    <div class="card">
+      <h2>Treatment Recommendations</h2>
+      <p><b>✅ Good:</b> Safe for consumption, only periodic monitoring needed.</p>
+      <p><b>⚠️ Moderate:</b> Apply activated carbon + UV filtration before use.</p>
+      <p><b>❌ Poor:</b> Requires chlorination, sedimentation, and advanced filtration.</p>
+    </div>
+
+    <div class="card">
+      <h2>Data for Good 🌍</h2>
+      <p>This system contributes to clean water initiatives by providing open-source data for NGOs and  
+      water authorities to improve resource management and sustainability.</p>
+    </div>
+
+    <div class="card">
+      <h2>Future Enhancements</h2>
+      <p>🔹 IoT integration for real-time monitoring<br>
+         🔹 Cloud dashboards for analytics<br>
+         🔹 Predictive AI-based auto treatment<br>
+         🔹 Mobile app integration</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Developed by <b>Himanshu Mishra</b> | BIT Sindri | © 2025</p>
+  </footer>
+
+  <script>
+    function predictQuality() {
+      const ph = parseFloat(document.getElementById('ph').value);
+      const turbidity = parseFloat(document.getElementById('turbidity').value);
+      const oxygen = parseFloat(document.getElementById('oxygen').value);
+      const resultDiv = document.getElementById('result');
+
+      if (isNaN(ph) || isNaN(turbidity) || isNaN(oxygen)) {
+        resultDiv.innerHTML = "⚠️ Please enter all parameters.";
+        resultDiv.style.color = "#ff6b6b";
+        return;
+      }
+
+      let score = 0;
+      if (ph >= 6.5 && ph <= 8.5) score++;
+      if (turbidity <= 5) score++;
+      if (oxygen >= 6) score++;
+
+      if (score === 3) {
+        resultDiv.innerHTML = "✅ Water Quality: GOOD<br>💧 Safe for drinking.";
+        resultDiv.style.color = "#00ffb7";
+      } else if (score === 2) {
+        resultDiv.innerHTML = "⚠️ Water Quality: MODERATE<br>🔹 Requires filtration & UV treatment.";
+        resultDiv.style.color = "#ffaa00";
+      } else {
+        resultDiv.innerHTML = "❌ Water Quality: POOR<br>🔻 Advanced treatment required.";
+        resultDiv.style.color = "#ff6b6b";
+      }
+    }
+  </script>
+</body>
+</html>
